@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="ie=edge"
+  >
+  <title>Document</title>
+  <link
+    rel="stylesheet"
+    href="node_modules/@mralexandernickel/flex-attributes/dist/flex-attributes.min.css"
+  >
+  <link
+    href="https://fonts.googleapis.com/css?family=Source+Code+Pro"
+    rel="stylesheet"
+  >
+  <link
+    rel="stylesheet"
+    href="node_modules/highlight.js/styles/dracula.css"
+  >
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+  <style>
+    ::selection {
+      background: white;
+    }
+  </style>
+</head>
+
+<body>
+  <main
+    ng-controller="ApplicationController as ctrl"
+    layout="column"
+  >
+    <div>
+      <input
+        type="text"
+        ng-model="ctrl.query"
+        ng-change="ctrl.modelChangeHandler()"
+        placeholder="Search for Snippets..."
+        autofocus
+      >
+    </div>
+
+
+    <div
+      class="result"
+      layout="row"
+    >
+      <div
+        flex="33"
+        class="items"
+      >
+        <ul>
+          <li
+            ng-repeat="clip in ctrl.clips"
+            ng-class="{active: ctrl.isActive(clip)}"
+            id="snippet-{{ $index }}"
+          >
+            {{ clip.snippet }}
+          </li>
+        </ul>
+      </div>
+
+
+      <section flex="66">
+        <pre><code ng-bind-html="ctrl.selectedClip"></code></pre>
+      </section>
+    </div>
+
+
+  </main>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+  <script src="dist/app.js"></script>
+</body>
+
+</html>
